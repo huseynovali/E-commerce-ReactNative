@@ -3,6 +3,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { product } from "../../types";
 import Categories from "../components/headerCategory/CategoriesSlider";
 import ProductCard from "../components/product/ProductCard";
+import Header from "../components/header/Header";
 
 function Home() {
   const [data, setData] = useState<product[]>([]);
@@ -20,6 +21,7 @@ function Home() {
 
   return (
     <View className="mt-5">
+      <Header />
       <Categories />
       <ScrollView>
         {loading ? (

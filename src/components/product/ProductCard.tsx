@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { product } from "../../../types";
 import { FontAwesome } from "@expo/vector-icons";
 
