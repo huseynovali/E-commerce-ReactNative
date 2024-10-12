@@ -1,7 +1,9 @@
 import { FontAwesome } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
+import CartHover from "./CartHover";
+import Popover, { PopoverMode } from "react-native-popover-view";
 
 function Header() {
   const cartProduct = useSelector((state: any) => state.cart.cart);
@@ -15,20 +17,23 @@ function Header() {
         {/* <TouchableOpacity onPress={() => {}}>
             <FontAwesome name="search" size={24} color="black" />
         </TouchableOpacity> */}
-        <TouchableOpacity
-          className="relative"
-          onPress={() => {
-            console.log(cartProduct);
-          }}
-        >
-          {cartProduct.length > 0 ? (
-            <View className="absolute z-10 -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full flex items-center justify-center">
-              <Text className="text-white text-xs">{cartProduct.length}</Text>
-            </View>
-          ) : null}
+        <Popover
+          from={
+            <TouchableOpacity className="relative">
+              {cartProduct.length > 0 ? (
+                <View className="absolute z-10 -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full flex items-center justify-center">
+                  <Text className="text-white text-xs">
+                    {cartProduct.length}
+                  </Text>
+                </View>
+              ) : null}
 
-          <FontAwesome name="shopping-cart" size={24} color="black" />
-        </TouchableOpacity>
+              <FontAwesome name="shopping-cart" size={24} color="black" />
+            </TouchableOpacity>
+          }
+        >
+          <CartHover />
+        </Popover>
       </View>
     </View>
   );
