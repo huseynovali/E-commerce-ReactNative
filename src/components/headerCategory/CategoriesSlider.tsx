@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
+import CategorySliderItem from "./CategorySliderItem";
 
 const data = [
   {
@@ -25,11 +26,7 @@ function Categories() {
       <FlatList
         data={data}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View className="border border-gray-200 p-2 m-2 rounded-lg w-[120px]">
-            <Text>{item.name}</Text>
-          </View>
-        )}
+        renderItem={({ item }) => <CategorySliderItem item={item} />}
         keyExtractor={(item) => item.id.toString()}
         horizontal
       />

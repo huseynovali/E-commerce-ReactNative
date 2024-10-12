@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { product } from "../../types";
-import Categories from "../components/Categories";
+import Categories from "../components/headerCategory/CategoriesSlider";
+import ProductCard from "../components/product/ProductCard";
 
 function Home() {
   const [data, setData] = useState<product[]>([]);
@@ -34,14 +35,7 @@ function Home() {
           >
             {data.map((item) => (
               <TouchableOpacity key={item.id}>
-                <View className="border border-gray-200 p-2 m-2 rounded-lg w-[120px]">
-                  <Image
-                    source={{ uri: item.image }}
-                    style={{ width: 100, height: 100 }}
-                  />
-                  <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
-                  <Text>{item.price}</Text>
-                </View>
+                <ProductCard item={item} />
               </TouchableOpacity>
             ))}
           </View>
