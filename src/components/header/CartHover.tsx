@@ -1,12 +1,17 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ProductAddCart,
+  ProductRemoveCard,
+} from "../../redux/slices/cartSlice";
 
 function CartHover() {
   const cartProduct = useSelector((state: any) => state.cart.cart);
+  const dispatch = useDispatch();
   return (
-    <View className="w-[300px] h-[300px] bg-white p-2">
-      {cartProduct.map((item: any) => (
+    <View className=" bg-white p-2">
+      {cartProduct.length > 0 ?(cartProduct.map((item: any) => (
         <View className="flex flex-row  items-center p-2" key={item.id}>
           <View className="w-12 h-12 bg-gray-200 rounded-full">
             <Image
@@ -15,12 +20,51 @@ function CartHover() {
             />
           </View>
 
-          <View className="flex flex-col ml-2">
+          <View className="flex flex-col ml-2 w-[200px]">
             <Text>{item.title.substring(0, 20)}</Text>
-            <Text>{item.quantity}</Text>
+            <View className="flex flex-row items-center justify-between mt-1">
+              <Text>{item.price}$</Text>
+              <View className="flex flex-row items-center border border-gray-100 ml-3">
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(ProductRemoveCard(item));
+                  }}
+                  className="bg-gray-400 w-[30px]"
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      paddingHorizontal: 12,
+                      color: "white",
+                    }}
+                  >
+                    -
+                  </Text>
+                </TouchableOpacity>
+                <Text style={{ fontSize: 18, paddingHorizontal: 10 }}>
+                  {item.quantity}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(ProductAddCart(item));
+                  }}
+                  className="bg-gray-500"
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      paddingHorizontal: 10,
+                      color: "white",
+                    }}
+                  >
+                    +
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
-      ))}
+      ))): <Text className="text-center">Cart is Empty</Text>}
     </View>
   );
 }
