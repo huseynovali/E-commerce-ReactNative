@@ -28,14 +28,19 @@ const cart = createSlice({
       const product = state.cart.find((item) => item?.id === action.payload.id);
       if (product) {
         if (product.quantity === 1) {
-          state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+          state.cart = state.cart.filter(
+            (item) => item.id !== action.payload.id
+          );
           return;
         }
         product.quantity -= 1;
       }
-    }
+    },
+    ProductDeleteCard: (state: CartState, action: { payload: number }) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { ProductAddCart , ProductRemoveCard } = cart.actions;
+export const { ProductAddCart, ProductRemoveCard,ProductDeleteCard } = cart.actions;
 export default cart.reducer;

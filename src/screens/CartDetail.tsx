@@ -1,7 +1,12 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { ProductAddCart, ProductRemoveCard } from "../redux/slices/cartSlice";
+import {
+  ProductAddCart,
+  ProductDeleteCard,
+  ProductRemoveCard,
+} from "../redux/slices/cartSlice";
+import { EvilIcons } from "@expo/vector-icons";
 
 function CartDetail() {
   const cartProducts = useSelector((state: any) => state.cart.cart);
@@ -9,14 +14,14 @@ function CartDetail() {
   return (
     <View>
       {cartProducts.map((product: any) => (
-        <View key={product.id} className="px-2 py-2 bg-white flex flex-row">
+        <View key={product.id} className="px-2 py-2 bg-white flex flex-row my-2 mx-2 rounded-lg">
           <View>
             <Image
               style={{ width: 50, height: 80 }}
               source={{ uri: product.image }}
             />
           </View>
-          <View className="ml-2">
+          <View className="ml-2 w-[80%]">
             <Text className="text-[14px] font-bold">{product.title}</Text>
             <Text>{product.category}</Text>
 
@@ -37,7 +42,14 @@ function CartDetail() {
                     -
                   </Text>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 18, paddingHorizontal: 10 ,backgroundColor:"#aaa",color:"white"}}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    paddingHorizontal: 10,
+                    backgroundColor: "#aaa",
+                    color: "white",
+                  }}
+                >
                   {product.quantity}
                 </Text>
                 <TouchableOpacity
@@ -56,7 +68,14 @@ function CartDetail() {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Text>{product.quantity}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(ProductDeleteCard(product.id));
+                }}
+                className=" px-2 py-1 rounded-md"
+              >
+                <EvilIcons name="trash" size={24} color="gray" />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
