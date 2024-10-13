@@ -10,6 +10,7 @@ import ProductDetail from "./src/screens/ProductDetail";
 import CartDetail from "./src/screens/CartDetail";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import CustomHeader from "./src/components/header/CustomHeader";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,7 +25,15 @@ function HomeStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Product" component={ProductDetail} />
-      <Stack.Screen name="Cart" component={CartDetail} />
+      <Stack.Screen
+        name="Cart"
+        component={CartDetail}
+        options={({ navigation }) => ({
+          header: () => (
+            <CustomHeader title="Your Cart" navigation={navigation} />
+          ),
+        })}
+      />
     </Stack.Navigator>
   );
 }

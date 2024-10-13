@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {  ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { product } from "../../types";
 import Categories from "../components/headerCategory/CategoriesSlider";
 import ProductCard from "../components/product/ProductCard";
