@@ -5,10 +5,12 @@ import {
   ProductAddCart,
   ProductRemoveCard,
 } from "../../redux/slices/cartSlice";
+import { useNavigation } from "@react-navigation/native";
 
 function CartHover() {
   const cartProduct = useSelector((state: any) => state.cart.cart);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   return (
     <View className=" bg-white p-2">
       {cartProduct.length > 0 ? (
@@ -78,7 +80,9 @@ function CartHover() {
             <Text style={{ color: "white" }}>Go To Checkout</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("Cart" as never);
+            }}
             className="border border-blue-500 p-2 rounded-full px-5"
           >
             <Text style={{ color: "blue" }}>View Cart</Text>
