@@ -11,6 +11,7 @@ import CartDetail from "./src/screens/CartDetail";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import CustomHeader from "./src/components/header/CustomHeader";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,6 +43,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
+        <StatusBar style="auto" />
         <Tab.Navigator screenOptions={{ headerShown: false }}>
           {/* HomeStack, tab içinde olacak */}
           <Tab.Screen
